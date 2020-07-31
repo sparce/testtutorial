@@ -1,6 +1,11 @@
 ---
 title: "Selecting data columns"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    theme: flatly
+    
 runtime: shiny_prerendered
 description: Short demo converting CSIRO Data School course notes
 ---
@@ -80,7 +85,9 @@ just_population
 ### Hands on with `select()`
 Use three different methods to select just the `country`, `year`, `pop`, and `gdpPercap` columns 
 from the `gapminder` dataframe.
-```{r chal-1, exercise=T, exercise.cap = "Using select()"}
+
+```{r chal1, exercise=TRUE}
+# filter the flights table to include only United and American flights
 select(gapminder, )
 
 select(gapminder, )
@@ -88,11 +95,17 @@ select(gapminder, )
 select(gapminder, )
 ```
 
-<div id="chal-1-hint">
-You can specify columns to `select()` by **name**, **position**, **negation**, or **range**.
-</div>
+```{markdown chal1-hint-1}
+You can specify columns to select() by: 
 
-```{r chal-1-solution}
+	* name 
+	* position
+	* exclusion
+
+Or by a range of those.
+```
+
+```{r chal1-hint-2}
 #By name
 select(gapminder, country, year, pop, gdpPercap)
 
@@ -102,7 +115,6 @@ select(gapminder, 1, 3, 5, 6)
 #By exclusion
 select(gapminder, -continent, -lifeExp)
 ```
-
 
 ## Select helper functions
 
@@ -122,32 +134,27 @@ select(gapminder, contains("e"))
 
 ### Using `select()` helpers
 Select all columns from `gapminder` that end with the letter "p"
-```{r chal-2, exercise = T, exercise.cap = "Using helpers"}
+```{r chal2, exercise=TRUE}
 select(gapminder, )
 ```
 
-```{r chal-2-solution}
+```{r chal2-solution}
 select(gapminder, ends_with("p"))
 ```
-
 
 ### Unexpected output
 Observe the output of the following code. Does it behave the way you expected? What additional argument do you need to provide to `contains()`
 to make it return only the `gdpPercap` column?
-~~~~
 
-~~~~
-{: .language-r}
-```{r chal-3, exercise = T, exercise.eval = T}
+```{r chal3, exercise=TRUE, exercise.eval = T}
 select(gapminder, contains("P"))
 ```
 
-<div id="chal-3-hint">
-The `contains()` function is actually provided by the `tidyselect` package, try 
-`?tidyselect::contains` if you are having trouble finding the help page for it.
-</div>
+```{r chal3-hint-1}
+?tidyselect::contains
+```
 
-```{r chal-3-solution}
+```{r chal3-hint-2}
 select(gapminder, contains("P", ignore.case = F))
 ```
 
@@ -174,11 +181,11 @@ have decided on.
 
 ### Renaming things
 Rename the `lifeExp` and `gdpPercap` columns to the `snake_case` format
-```{r chal-4, exercise = T}
+
+```{r chal4, exercise=TRUE}
 rename(gapminder, )
 ```
 
-```{r chal-4-solution}
+```{r chal4-solution}
 rename(gapminder, life_exp = lifeExp, gdp_per_cap = gdpPercap)
 ```
-
